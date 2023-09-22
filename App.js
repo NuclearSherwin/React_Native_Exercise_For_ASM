@@ -1,20 +1,34 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import React, { useEffect } from "react";
+import Database from "./Database";
+import DetailScreen from "./screens/DetailScreen";
+import EntryScreen from "./screens/EntryScreen";
+import HomeScreen from "./screens/HomeScreen";
+import SearchScreen from "./screens/SearchScreen";
+import BottomTabNavigatorComponent from "./screens/BottomTabNavigator";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+const Stack = createStackNavigator();
 
-export default function App() {
+
+
+
+const App = () => {
+  // TODO: implement Bottom Tab navigation
+  const Tab = createBottomTabNavigator();
+  useEffect(() => {
+    Database.initDatabase();
+  }, []);
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Tab.Navigator initialRouteName="Home">
+        <Tab.Screen name="Home" component={HomeScreen} />
+        <Tab.Screen name="Entry" component={EntryScreen} />
+        {/* <Tab.Screen name="Detail" component={DetailScreen} /> */}
+        <Tab.Screen name="Search" component={SearchScreen} />
+      </Tab.Navigator>
+    </NavigationContainer>
   );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+};
+export default App;
