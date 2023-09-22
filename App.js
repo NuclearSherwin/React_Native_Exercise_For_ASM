@@ -11,7 +11,9 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 const Stack = createStackNavigator();
 
 
-
+const iconName = {
+  home:"Home"
+}
 
 const App = () => {
   // TODO: implement Bottom Tab navigation
